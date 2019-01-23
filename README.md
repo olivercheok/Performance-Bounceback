@@ -19,3 +19,5 @@ The challenging part is able to identify and narrow down what was causing the bo
 
 Steam VR Version 1.27
 Oculus Rift
+
+Resubmitted after 1 hour

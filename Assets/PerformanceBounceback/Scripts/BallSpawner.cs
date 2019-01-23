@@ -47,7 +47,7 @@ public GameObject GetPooledBall()
         ballsAmount++;
         ballPoolNum = ballsAmount - 1;
     }
-        Debug.Log("GetPooledBall returned ball number: " + ballPoolNum);
+//        Debug.Log("GetPooledBall returned ball number: " + ballPoolNum);
         return pooledBalls[ballPoolNum];
 }
    	
@@ -63,11 +63,21 @@ public GameObject GetPooledBall()
 
     void SpawnBall()
     {
-        GameObject selectedBall = BallSpawner.current.GetPooledBall();
-        selectedBall.transform.position = transform.position;
+		GameObject selectedBall = BallSpawner.current.GetPooledBall();
+		selectedBall.transform.position = transform.position;
         Rigidbody selectedRigidbody = selectedBall.GetComponent<Rigidbody>();
         selectedRigidbody.velocity = Vector3.zero;
         selectedRigidbody.angularVelocity = Vector3.zero;
         selectedBall.SetActive(true);
+
+		//Disable balls after 10 seconds
+		StartCoroutine(TemporaryBall(selectedBall));
     }
+
+	public IEnumerator TemporaryBall (GameObject ball) {
+		// After a period of time, destroy the coin. 
+		yield return new WaitForSeconds(10);
+		ball.SetActive(false);
+	}
+
 }
